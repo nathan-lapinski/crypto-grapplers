@@ -29,6 +29,7 @@ import type {
 export interface GrapplerFactoryInterface extends utils.Interface {
   functions: {
     "createRandomGrappler(string)": FunctionFragment;
+    "getNumberOfGrapplers()": FunctionFragment;
     "grapplerToOwner(uint256)": FunctionFragment;
     "grapplers(uint256)": FunctionFragment;
     "owner()": FunctionFragment;
@@ -39,6 +40,7 @@ export interface GrapplerFactoryInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "createRandomGrappler"
+      | "getNumberOfGrapplers"
       | "grapplerToOwner"
       | "grapplers"
       | "owner"
@@ -49,6 +51,10 @@ export interface GrapplerFactoryInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "createRandomGrappler",
     values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getNumberOfGrapplers",
+    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "grapplerToOwner",
@@ -70,6 +76,10 @@ export interface GrapplerFactoryInterface extends utils.Interface {
 
   decodeFunctionResult(
     functionFragment: "createRandomGrappler",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getNumberOfGrapplers",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -138,6 +148,8 @@ export interface GrapplerFactory extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    getNumberOfGrapplers(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     grapplerToOwner(
       arg0: BigNumberish,
       overrides?: CallOverrides
@@ -173,6 +185,8 @@ export interface GrapplerFactory extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  getNumberOfGrapplers(overrides?: CallOverrides): Promise<BigNumber>;
+
   grapplerToOwner(
     arg0: BigNumberish,
     overrides?: CallOverrides
@@ -207,6 +221,8 @@ export interface GrapplerFactory extends BaseContract {
       _name: string,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    getNumberOfGrapplers(overrides?: CallOverrides): Promise<BigNumber>;
 
     grapplerToOwner(
       arg0: BigNumberish,
@@ -253,6 +269,8 @@ export interface GrapplerFactory extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    getNumberOfGrapplers(overrides?: CallOverrides): Promise<BigNumber>;
+
     grapplerToOwner(
       arg0: BigNumberish,
       overrides?: CallOverrides
@@ -279,6 +297,10 @@ export interface GrapplerFactory extends BaseContract {
     createRandomGrappler(
       _name: string,
       overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getNumberOfGrapplers(
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     grapplerToOwner(

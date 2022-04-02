@@ -47,10 +47,12 @@ contract GrapplerFactory is Ownable {
     }
 
     function createRandomGrappler(string memory _name) public {
-        // For now, limit to one creation per user
-        require(ownerGrapplerCount[msg.sender] == 0);
         uint256 randSkills = _generateRandomSkills(_name);
         randSkills = randSkills - (randSkills % 100);
         _createGrappler(_name, randSkills);
+    }
+
+    function getNumberOfGrapplers() external view returns (uint256) {
+        return grapplers.length;
     }
 }
